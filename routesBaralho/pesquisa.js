@@ -1,35 +1,35 @@
-import { baralho } from "./array"
+// import { baralho } from "./array"
 
-function pesqPorID(req, res) {
-    const { id } = req.query
+// function pesqPorID(req, res) {
+//     const { id } = req.query
 
-    if(id.trim() === ""){
-        return res.status(404).send("pesquisa nula!")
-    }
+//     if(id.trim() === ""){
+//         return res.status(404).send("pesquisa nula!")
+//     }
 
-    const baralhoFind = baralho.findIndex((element) => element.id == id)
+//     const baralhoFind = baralho.findIndex((element) => element.id == id)
 
-    if(baralhoFind !== -1){
-        return res.status(201).send(baralho[baralhoFind])
-    }
-    return res.status(404).send("baralho não encontrado!")
-}
+//     if(baralhoFind !== -1){
+//         return res.status(201).send(baralho[baralhoFind])
+//     }
+//     return res.status(404).send("baralho não encontrado!")
+// }
 
 
-function pesqPorTitulo(req, res) {
-    const { titulo } = req.query
-    if(titulo.trim() === ""){
-        return res.status(404).send("pesquisa nula!")
-    }
-    const baralhoFind = baralho.filter((element) => {
-        if(element.titulo.toLowerCase().trim() === titulo.toLowerCase().trim()){
-            return element
-        }
-    })
-    if(!baralhoFind){
-        return res.status(404).send("baralho não encontrado!")
-    }
-    return res.status(201).send(baralhoFind)
-}
+// function pesqPorTitulo(req, res) {
+//     const { titulo } = req.query
+//     if(titulo.trim() === ""){
+//         return res.status(404).send("pesquisa nula!")
+//     }
+//     const baralhoFind = baralho.filter((element) => {
+//         if(element.titulo.toLowerCase().trim() === titulo.toLowerCase().trim()){
+//             return element
+//         }
+//     })
+//     if(!baralhoFind){
+//         return res.status(404).send("baralho não encontrado!")
+//     }
+//     return res.status(201).send(baralhoFind)
+// }
 
-export { pesqPorID, pesqPorTitulo }
+// export { pesqPorID, pesqPorTitulo }

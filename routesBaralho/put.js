@@ -1,9 +1,11 @@
-import { baralho, } from "./array.js";
-import { verificarTitulo } from "./verificar.js";
+// import { baralho, } from "./array.js";
+// import { verificarTitulo } from "./verificar.js";
+import { Baralho } from "./schema.js"
 
-export const updateBaralho = async (titulo) => {
+export const updateBaralho = async (id, titulo) => {
     try {
-        const updatedBaralho = await baralho.FindByIdAndUpdate(
+        console.log(Baralho)
+        const updatedBaralho = await Baralho.findByIdAndUpdate(
             id,
             { titulo },
             { new:true, runValidators:true }

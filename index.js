@@ -1,13 +1,18 @@
 import express from 'express'
+import dotenv from 'dotenv'
 import { mongoose } from 'mongoose';
 import { routesBaralho } from './routesBaralho/routes.js';
 import { routesFlash } from './routesFlashcards/routes.js';
+
+dotenv.config()
+const dbUser = process.env.DB_USER
+const dbPass = process.env.DB_PASSWORD
 
 const app = express();
 const port = 3000;
 
 mongoose.connect(
-    "mongodb+srv://vitor-2006:MongoDB7993@cluster0.nkow1bb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    `mongodb+srv://${dbUser}:${dbPass}@cluster0.nkow1bb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 )
 
 mongoose.connection.once("open", () => {

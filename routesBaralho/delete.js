@@ -1,9 +1,12 @@
-import { baralho } from "./array.js";
+// import { baralho } from "./array.js";
 //import flashcard from "../routesFlashcards/array.js"
+import { Baralho } from "./schema.js"
+import { deleteFlashPorBaralho } from "../routesFlashcards/delete.js"
 
 export const deleteBaralho = async (id) => {
     try {
-        return await baralho.findByIdAndDelete(id)
+        deleteFlashPorBaralho(id)
+        return await Baralho.findByIdAndDelete(id)
     } catch (error) {
         console.error('Erro ao deletar baralho:', error.message)
         throw error

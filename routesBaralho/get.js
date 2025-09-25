@@ -1,9 +1,9 @@
-import express from 'express'
-import { baralho } from "./array.js"
+// import { baralho } from "./array.js"
+import { Baralho } from "./schema.js"
 
 export const getBaralho = async (req, res) => {
     try {
-        return await baralho.find()
+        return await Baralho.find()
     } catch (error) {
         console.log('erro ao buscar os baralhos', error.message)
         throw error

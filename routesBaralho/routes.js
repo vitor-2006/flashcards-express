@@ -1,6 +1,6 @@
 import express from 'express'
 // import { getBaralho } from './get.js'
-import getBaralho from './get.js'
+import { getBaralho } from './get.js'
 // import { postBaralho } from './post.js'
 import { createBaralho } from './post.js'
 // import { putBaralho } from './put.js'
@@ -43,9 +43,9 @@ routesBaralho.delete('/baralho/:id', async (req, res) => {
     const { id } = req.params
     const deletedBaralho = deleteBaralho(id)
     if(deletedBaralho) {
-        res.status(200).send({ message:'livro editado com sucesso', baralho: deletedBaralho })
+        res.status(200).send({ message:'baralho e seus flashcards deletados com sucesso', baralho: deletedBaralho })
     } else {
-        res.status(404).send({ message: 'livro não encontrado' })
+        res.status(404).send({ message: 'baralho não encontrado' })
     }
 });
 
