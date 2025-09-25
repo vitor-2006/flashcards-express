@@ -7,6 +7,7 @@ import { createFlashcard } from "./post.js";
 import { updateFlashcard } from "./put.js";
 // import { deleteFlashcard } from './delete.js';
 import { deleteFlashcard } from "./delete.js";
+import { pesqPorPergunta, pesqPorResposta, pesqPorIdBaralho } from './pesquisa.js';
 
 const routesFlash  = express.Router();
 
@@ -50,5 +51,21 @@ routesFlash.delete('/flash/:id', async (req, res) => {
 
 
 // routesFlash.get('/flash/id/', )
+routesFlash.get('/flash/search', async (req, res) => {
+    const { pergunta, resposta, idBaralho } = req.query
+    let searchFlash 
+    if(pergunta) {
+       searchFlash = await pesqPorPergunta(pergunta)
+    } else if(resposta) {
+        searchFlash = await pesqPorResposta(resposta)
+    } else if(idBaralho) {
+        searchFlash = await pesqPorIdBaralho(idBaralho)
+    }
+    if(searchFlash) {
+        res.status(200).send(searchFlash)
+    } else {
+        res.status(404).send({ message: 'flashcard não encontrado' })
+    }
+})
 
 export {routesFlash}

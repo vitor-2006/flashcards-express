@@ -8,6 +8,7 @@ import { updateBaralho } from './put.js';
 // import { deleteBaralho } from './delete.js'
 import { deleteBaralho } from './delete.js';
 // import { pesqPorID, pesqPorTitulo } from './pesquisa.js'
+import { pesqPorTitulo } from './pesquisa.js';
 
 const routesBaralho  = express.Router();
 
@@ -51,5 +52,14 @@ routesBaralho.delete('/baralho/:id', async (req, res) => {
 
 // routesBaralho.get('/baralho/id/', pesqPorID)
 // routesBaralho.get('/baralho/titulo/',pesqPorTitulo )
+routesBaralho.get('/baralho/search/', async (req, res) => {
+    const { titulo } = req.query
+    const searchBaralho = await pesqPorTitulo(titulo)
+    if(searchBaralho) {
+        res.status(200).send(searchBaralho)
+    } else {
+        res.status(404).send({ message: 'baralho não encontrado' })
+    }
+})
 
 export {routesBaralho}

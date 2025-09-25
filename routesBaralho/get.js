@@ -1,7 +1,7 @@
 // import { baralho } from "./array.js"
 import { Baralho } from "./schema.js"
 
-export const getBaralho = async (req, res) => {
+export const getBaralho = async () => {
     try {
         return await Baralho.find()
     } catch (error) {

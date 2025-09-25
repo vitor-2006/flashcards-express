@@ -1,4 +1,40 @@
 // import { flashcard } from "./array.js"
+import { Flashcard } from "./schema.js";
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+  }
+  
+export const pesqPorPergunta = async (pergunta) => {
+    try {
+      const safePergunta = escapeRegex(pergunta);
+      console.log(safePergunta)
+      return await Flashcard.find({ pergunta: { $regex: pergunta, $options: "i" } }).exec();
+    } catch (error) {
+      console.error('Erro ao pesquisar flashcard', error.message);
+      throw error;
+    }
+}
+
+export const pesqPorResposta = async (resposta) => {
+    try {
+      const safeResposta = escapeRegex(resposta);
+      return await Flashcard.find({ resposta: { $regex: safeResposta, $options: "i" } }).exec();
+    } catch (error) {
+      console.error('Erro ao pesquisar flashcard', error.message);
+      throw error;
+    }
+}
+
+export const pesqPorIdBaralho = async (idBaralho) => {
+    try {
+      const safeIdBaralho = escapeRegex(idBaralho);
+      return await Flashcard.find({ idBaralho: { $regex: safeIdBaralho, $options: "i" } }).exec();
+    } catch (error) {
+      console.error('Erro ao pesquisar flashcard', error.message);
+      throw error;
+    }
+}
 
 // function pesqPorID(req, res) {
 //     const { id } = req.query

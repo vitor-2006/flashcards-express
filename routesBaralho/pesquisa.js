@@ -1,6 +1,21 @@
 // import { baralho } from "./array"
+import { Baralho } from "./schema.js";
 
-// function pesqPorID(req, res) {
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+  }
+  
+export const pesqPorTitulo = async (titulo) => {
+    try {
+      const safeTitulo = escapeRegex(titulo);
+      return await Baralho.find({ titulo: { $regex: safeTitulo, $options: "i" } }).exec();
+    } catch (error) {
+      console.error('Erro ao pesquisar baralho', error.message);
+      throw error;
+    }
+}
+
+// function pesqPorID(req, res) {-
 //     const { id } = req.query
 
 //     if(id.trim() === ""){
@@ -14,7 +29,6 @@
 //     }
 //     return res.status(404).send("baralho não encontrado!")
 // }
-
 
 // function pesqPorTitulo(req, res) {
 //     const { titulo } = req.query
