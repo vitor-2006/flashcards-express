@@ -21,6 +21,9 @@ routesFlash.get('/flash', async (req, res) => {
 routesFlash.post('/flash', async (req, res) => {
     const { pergunta, resposta, idBaralho } = req.body
     const newFlashcard = await createFlashcard(pergunta, resposta, idBaralho)
+    if(!newFlashcard) {
+        return res.status(400).send("flashcard inválido!")
+    }
     return res.status(201).send({ message: 'flashcard criado com sucesso', flashcard: newFlashcard })
 });
 
@@ -29,6 +32,9 @@ routesFlash.put('/flash/:id', async (req, res) => {
     const { id } = req.params
     const { pergunta, resposta, idBaralho } = req.body
     const updatedFlashcard = await updateFlashcard(id, pergunta, resposta, idBaralho)
+    if(!updatedFlashcard) {
+        return res.status(400).send("flashcard inválido!")
+    }
     if(updatedFlashcard) {
         return res.status(200).send({ message: 'flashcard atualizado com sucesso', flashcard: updatedFlashcard })
     } else {
