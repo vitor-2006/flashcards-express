@@ -15,6 +15,14 @@ export const pesqPorTitulo = async (titulo) => {
     }
 }
 
+export const verificPorIdBaralho = async (id) => {
+  try {
+    return await Baralho.find({id: id})
+  } catch (error) {
+    console.error('Erro ao pesquisar Baralho', error.message);
+    throw error;
+  }
+}
 // function pesqPorID(req, res) {-
 //     const { id } = req.query
 

@@ -1,9 +1,14 @@
 // import { flashcard, idGen } from "./array.js";
 // import { verificarPergunta, verificarResposta, verificarIDflashcard } from "./verificar.js";
 import { Flashcard } from "./schema.js"
+import { verificPorIdBaralho } from "../routesBaralho/pesquisa.js"
 
 export const createFlashcard = async (pergunta, resposta, idBaralho) => {
     try {
+        const arrayBaralho = verificPorIdBaralho(idBaralho)
+        if(arrayBaralho.length === 0) {
+            return false
+        }
         const newFlashcard = new Flashcard({ pergunta, resposta, idBaralho })
         return await newFlashcard.save()
     } catch (error) {

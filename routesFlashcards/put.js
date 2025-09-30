@@ -1,9 +1,14 @@
 // import { flashcard, } from "./array.js";
 // import { verificarPergunta, verificarResposta, verificarIDflashcard } from "./verificar.js";
 import { Flashcard } from "./schema.js"
+import { verificPorIdBaralho } from "../routesBaralho/pesquisa.js"
 
 export const updateFlashcard = async (pergunta, resposta, idBaralho) => {
     try {
+        const arrayBaralho = verificPorIdBaralho(idBaralho)
+        if(arrayBaralho === 0) {
+            return false
+        }
         const updatedFlashcard = await Flashcard.findByIdAndUpdate(
             id,
             { pergunta, resposta, idBaralho },
