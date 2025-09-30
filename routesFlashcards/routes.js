@@ -14,14 +14,14 @@ const routesFlash  = express.Router();
 // routesFlash.get('/flash', getFlashcard);
 routesFlash.get('/flash', async (req, res) => {
     const flashcards = await getFlashcard()
-    res.status(200).send(flashcards)
+    return res.status(200).send(flashcards)
 });
 
 // routesFlash.post('/flash', postFlashcard);
 routesFlash.post('/flash', async (req, res) => {
     const { pergunta, resposta, idBaralho } = req.body
     const newFlashcard = await createFlashcard(pergunta, resposta, idBaralho)
-    res.status(201).send({ message: 'flashcard criado com sucesso', flashcard: newFlashcard })
+    return res.status(201).send({ message: 'flashcard criado com sucesso', flashcard: newFlashcard })
 });
 
 // routesFlash.put('/flash/:id', putFlashcard);
