@@ -30,9 +30,9 @@ routesFlash.put('/flash/:id', async (req, res) => {
     const { pergunta, resposta, idBaralho } = req.body
     const updatedFlashcard = await updateFlashcard(id, pergunta, resposta, idBaralho)
     if(updatedFlashcard) {
-        res.status(200).send({ message: 'flashcard atualizado com sucesso', flashcard: updatedFlashcard })
+        return res.status(200).send({ message: 'flashcard atualizado com sucesso', flashcard: updatedFlashcard })
     } else {
-        res.status(404).send({ message: 'flashcard não encontrado' })
+        return res.status(404).send({ message: 'flashcard não encontrado' })
     }
 });
 
@@ -42,9 +42,9 @@ routesFlash.delete('/flash/:id', async (req, res) => {
     const { id } = req.params
     const deletedFlashcard = deleteFlashcard(id)
     if(deletedFlashcard) {
-        res.status(200).send({ message:'flashcard deletado com sucesso', flashcard: deletedFlashcard })
+        return res.status(200).send({ message:'flashcard deletado com sucesso', flashcard: deletedFlashcard })
     } else {
-        res.status(404).send({ message: 'flashcard não encontrado' })
+        return res.status(404).send({ message: 'flashcard não encontrado' })
     }
 });
 
@@ -62,9 +62,9 @@ routesFlash.get('/flash/search', async (req, res) => {
         searchFlash = await pesqPorIdBaralho(idBaralho)
     }
     if(searchFlash) {
-        res.status(200).send(searchFlash)
+        return res.status(200).send(searchFlash)
     } else {
-        res.status(404).send({ message: 'flashcard não encontrado' })
+        return res.status(404).send({ message: 'flashcard não encontrado' })
     }
 })
 
