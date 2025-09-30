@@ -32,13 +32,10 @@ routesFlash.put('/flash/:id', async (req, res) => {
     const { id } = req.params
     const { pergunta, resposta, idBaralho } = req.body
     const updatedFlashcard = await updateFlashcard(id, pergunta, resposta, idBaralho)
-    if(!updatedFlashcard) {
-        return res.status(400).send("flashcard inválido!")
-    }
     if(updatedFlashcard) {
         return res.status(200).send({ message: 'flashcard atualizado com sucesso', flashcard: updatedFlashcard })
     } else {
-        return res.status(404).send({ message: 'flashcard não encontrado' })
+        return res.status(404).send({ message: 'flashcard não encontrado ou inválido' })
     }
 });
 
