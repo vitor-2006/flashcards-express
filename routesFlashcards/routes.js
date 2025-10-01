@@ -14,7 +14,11 @@ const routesFlash  = express.Router();
 // routesFlash.get('/flash', getFlashcard);
 routesFlash.get('/flash', async (req, res) => {
     const flashcards = await getFlashcard()
-    return res.status(200).send(flashcards)
+    if(flashcards) {
+        return res.status(200).send(flashcards)
+    } else {
+        return res.status(404).send({ message: 'não têm flashcards registrados' })
+    }
 });
 
 // routesFlash.post('/flash', postFlashcard);

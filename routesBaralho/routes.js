@@ -16,14 +16,22 @@ const routesBaralho  = express.Router();
 // routesBaralho.get('/baralho', getBaralho);
 routesBaralho.get('/baralho', async (req, res) => {
     const baralhos = await getBaralho()
-    return res.status(200).send(baralhos)
+    if(baralhos) {
+        return res.status(200).send(baralhos)
+    } else {
+        return res.status(404).send({ message: 'não têm baralhos registrados' })
+    }
 })
 
 // routesBaralho.post('/baralho', postBaralho);
 routesBaralho.post('/baralho', async (req, res) => {
     const { titulo } = req.body
     const newBaralho = await createBaralho(titulo)
-    return res.status(201).send({ message: 'Baralho criado com sucesso', baralho: newBaralho })
+    if(newBaralho){
+        return res.status(201).send({ message: 'Baralho criado com sucesso', baralho: newBaralho })
+    } else {
+        return res.status(400).send({ message: 'erro ao criar baralho' })
+    }
 })
 
 // routesBaralho.put('/baralho/:id', putBaralho);
