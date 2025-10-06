@@ -3,7 +3,7 @@
 import { Flashcard } from "./schema.js"
 import { verificPorIdBaralho } from "../routesBaralho/pesquisa.js"
 
-export const updateFlashcard = async (pergunta, resposta, idBaralho) => {
+export const updateFlashcard = async (id, pergunta, resposta, idBaralho) => {
     try {
         const arrayBaralho = verificPorIdBaralho(idBaralho)
         if(arrayBaralho === 0) {
