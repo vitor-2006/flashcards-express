@@ -8,7 +8,6 @@ function escapeRegex(text) {
 export const pesqPorPergunta = async (pergunta) => {
     try {
       const safePergunta = escapeRegex(pergunta);
-      console.log(safePergunta)
       return await Flashcard.find({ pergunta: { $regex: pergunta, $options: "i" } }).exec();
     } catch (error) {
       console.error('Erro ao pesquisar flashcard', error.message);
