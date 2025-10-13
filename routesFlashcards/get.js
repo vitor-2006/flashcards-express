@@ -1,7 +1,7 @@
 // import { flashcard } from "./array.js"
 import { Flashcard } from "./schema.js"
 
-export const getFlashcard = async (req, res) => {
+export const getFlashcard = async () => {
     try {
         return await Flashcard.find()
     } catch (error) {
