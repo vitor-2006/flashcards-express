@@ -9,12 +9,13 @@ import { updateBaralho } from './put.js';
 import { deleteBaralho } from './delete.js';
 // import { pesqPorID, pesqPorTitulo } from './pesquisa.js'
 import { pesqPorTitulo } from './pesquisa.js';
+import { middleWare } from '../middleware/authentication.js';
 
 const routesBaralho  = express.Router();
 
 
 // routesBaralho.get('/baralho', getBaralho);
-routesBaralho.get('/baralho', async (req, res) => {
+routesBaralho.get('/baralho', middleWare, async (req, res) => {
     const baralhos = await getBaralho()
     if(baralhos) {
         return res.status(200).send(baralhos)
@@ -24,7 +25,7 @@ routesBaralho.get('/baralho', async (req, res) => {
 })
 
 // routesBaralho.post('/baralho', postBaralho);
-routesBaralho.post('/baralho', async (req, res) => {
+routesBaralho.post('/baralho', middleWare, async (req, res) => {
     const { titulo } = req.body
     const newBaralho = await createBaralho(titulo)
     if(newBaralho){
@@ -35,7 +36,7 @@ routesBaralho.post('/baralho', async (req, res) => {
 })
 
 // routesBaralho.put('/baralho/:id', putBaralho);
-routesBaralho.put('/baralho/:id', async (req, res) => {
+routesBaralho.put('/baralho/:id', middleWare, async (req, res) => {
     const { id } = req.params
     const { titulo } = req.body
     const updatedBaralho = await updateBaralho(id, titulo)
@@ -48,7 +49,7 @@ routesBaralho.put('/baralho/:id', async (req, res) => {
 
 
 // routesBaralho.delete('/baralho/:id', deleteBaralho);
-routesBaralho.delete('/baralho/:id', async (req, res) => {
+routesBaralho.delete('/baralho/:id', middleWare, async (req, res) => {
     const { id } = req.params
     const deletedBaralho = deleteBaralho(id)
     if(deletedBaralho) {
@@ -60,7 +61,7 @@ routesBaralho.delete('/baralho/:id', async (req, res) => {
 
 // routesBaralho.get('/baralho/id/', pesqPorID)
 // routesBaralho.get('/baralho/titulo/',pesqPorTitulo )
-routesBaralho.get('/baralho/search/', async (req, res) => {
+routesBaralho.get('/baralho/search/', middleWare, async (req, res) => {
     const { titulo } = req.query
     const searchBaralho = await pesqPorTitulo(titulo)
     if(searchBaralho) {

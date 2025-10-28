@@ -8,11 +8,12 @@ import { updateFlashcard } from "./put.js";
 // import { deleteFlashcard } from './delete.js';
 import { deleteFlashcard } from "./delete.js";
 import { pesqPorPergunta, pesqPorResposta, pesqPorIdBaralho } from './pesquisa.js';
+import { middleWare } from '../middleware/authentication.js';
 
 const routesFlash  = express.Router();
 
 // routesFlash.get('/flash', getFlashcard);
-routesFlash.get('/flash', async (req, res) => {
+routesFlash.get('/flash', middleWare, async (req, res) => {
     const flashcards = await getFlashcard()
     if(flashcards) {
         return res.status(200).send(flashcards)
@@ -22,7 +23,7 @@ routesFlash.get('/flash', async (req, res) => {
 });
 
 // routesFlash.post('/flash', postFlashcard);
-routesFlash.post('/flash', async (req, res) => {
+routesFlash.post('/flash', middleWare, async (req, res) => {
     const { pergunta, resposta, idBaralho } = req.body
     const newFlashcard = await createFlashcard(pergunta, resposta, idBaralho)
     if(!newFlashcard) {
@@ -32,7 +33,7 @@ routesFlash.post('/flash', async (req, res) => {
 });
 
 // routesFlash.put('/flash/:id', putFlashcard);
-routesFlash.put('/flash/:id', async (req, res) => {
+routesFlash.put('/flash/:id', middleWare, async (req, res) => {
     const { id } = req.params
     const { pergunta, resposta, idBaralho } = req.body
     const updatedFlashcard = await updateFlashcard(id, pergunta, resposta, idBaralho)
@@ -45,7 +46,7 @@ routesFlash.put('/flash/:id', async (req, res) => {
 
 
 // routesFlash.delete('/flash/:id', deleteFlashcard);
-routesFlash.delete('/flash/:id', async (req, res) => {
+routesFlash.delete('/flash/:id', middleWare, async (req, res) => {
     const { id } = req.params
     const deletedFlashcard = deleteFlashcard(id)
     if(deletedFlashcard) {
@@ -58,7 +59,7 @@ routesFlash.delete('/flash/:id', async (req, res) => {
 
 
 // routesFlash.get('/flash/id/', )
-routesFlash.get('/flash/search', async (req, res) => {
+routesFlash.get('/flash/search', middleWare, async (req, res) => {
     const { pergunta, resposta, idBaralho } = req.query
     let searchFlash 
     if(pergunta) {
