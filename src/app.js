@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import { mongoose } from 'mongoose';
 import { routesBaralho } from './routesBaralho/routes.js';
 import { routesFlash } from './routesFlashcards/routes.js';
+import { userRoutes } from './routesUser/routes.js';
 
 dotenv.config()
 const dbUser = process.env.DB_USER
@@ -26,6 +27,7 @@ mongoose.connection?.on("error", (err) => {
 app.use(express.json());
 app.use(routesBaralho)
 app.use(routesFlash)
+app.use(userRoutes)
 	
 app.listen(port, () => {
     console.log("Api iniciada na porta: " + port);
